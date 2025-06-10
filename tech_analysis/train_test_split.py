@@ -27,7 +27,7 @@ class TrainTestSets:
             end = "2025-06-06"
         data = yf.download(tickers = ticker, start=start, end=end, interval=interval)
         data.columns = data.columns.droplevel(1)
-        # Calculamos el pounto de corte
+        # Calculamos el punto de corte
         split_idx = int(len(data)*0.7)
         # Particiones respetando la secuencia temporal
         train = data.iloc[:split_idx]
