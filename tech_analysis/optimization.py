@@ -26,11 +26,11 @@ class SMAOptTechAnalysis:
 
         return best_results
     
-    def sma_strategy_optimization(self):
+    def sma_strategy_optimization(self, all_data, n1, n2):
         train_results = []
         for set_type, df in all_data.items():
             if "train" in set_type:
-                train_results.append(sma_params_n_tf_optimization(self, set_type, df, n1, n2))
+                train_results.append(self.sma_params_n_tf_optimization(set_type, df, n1, n2))
 
         optimal_tf_df = pd.DataFrame(train_results)
         return optimal_tf_df.sort_values(by='Return [%]', ascending=False)

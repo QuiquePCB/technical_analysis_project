@@ -38,8 +38,9 @@ class TrainTestSets:
         all_data = {}
 
         for interval in intervals:
-            data_from_split = train_test_split(self, ticker, interval)
+            data_from_split = self.train_test_split(ticker, interval)
             all_data[f"{interval}_train"] = data_from_split[0]
             all_data[f"{interval}_test"] = data_from_split[1]
 
         return all_data
+
