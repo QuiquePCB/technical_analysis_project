@@ -6,14 +6,17 @@ class TrainTestSets:
         pass
 
     def train_test_split(self, ticker, interval):
-        """_summary_
 
-        Args:
-            ticker (_type_): _description_
-            interval (_type_): _description_
+        """
+        Download historical data for a given ticker and interval, and split it into
+        chronological training and testing sets.
+
+        Arguments:
+            ticker:  symbol for the stock or asset to download data for
+            interval: data interval accepted by yfinance.
 
         Returns:
-            _type_: _description_
+            tuple: A tuple containing the training and testing datasets as pandas DataFrames.
         """
 
         if interval in ["1m", "2m", "5m", "30m"]:
@@ -25,16 +28,28 @@ class TrainTestSets:
         elif interval in ["1h", "4h", "1d", "5d", "1wk"]:
             start = "2024-06-06"
             end = "2025-06-06"
+        # Download data using yfinance
         data = yf.download(tickers = ticker, start=start, end=end, interval=interval)
         data.columns = data.columns.droplevel(1)
-        # Calculamos el punto de corte
+         # Calculate split index (70% train, 30% test)
         split_idx = int(len(data)*0.7)
-        # Particiones respetando la secuencia temporal
+        # Create train and test sets while preserving temporal order
         train = data.iloc[:split_idx]
         test = data.iloc[split_idx:]
         return (train, test)
     
     def interval_train_test_split(self, ticker, intervals):
+        """
+        Generate training and testing splits for multiple time intervals
+
+        Args:
+            ticker 
+            intervals: List of time intervals
+
+        Returns:
+            dict: A dictionary where keys are labeled with the interval and train/test suffix,
+                  and values are the corresponding pandas DataFrames.
+        """
         all_data = {}
 
         for interval in intervals:
