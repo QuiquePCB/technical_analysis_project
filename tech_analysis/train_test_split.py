@@ -5,7 +5,7 @@ class TrainTestSets:
     def __init__(self):
         pass
 
-    def train_test_split(self, ticker, interval):
+    def train_test_split(self, ticker:str , interval:str) -> tuple:
 
         """
         Download historical data for a given ticker and interval, and split it into
@@ -38,7 +38,7 @@ class TrainTestSets:
         test = data.iloc[split_idx:]
         return (train, test)
     
-    def interval_train_test_split(self, ticker, intervals):
+    def interval_train_test_split(self, ticker:str, intervals:list) -> dict:
         """
         Generate training and testing splits for multiple time intervals
 

@@ -9,7 +9,7 @@ class SMAOptTechAnalysis:
         self.strategy = Strategy
         pass
 
-    def sma_params_n_tf_optimization(self, set_type, data, n1, n2, param = 'Return [%]'):
+    def sma_params_n_tf_optimization(self, set_type:str, data:pd.DataFrame, n1:range , n2:range, param:str = 'Return [%]') -> dict:
         # Initialize backtest with given strategy, capital, and commission
 
         bt = Backtest(data, self.strategy, cash=10_000_000, commission=0.002)
@@ -29,7 +29,7 @@ class SMAOptTechAnalysis:
 
         return best_results
     
-    def sma_strategy_optimization(self, all_data, n1, n2):
+    def sma_strategy_optimization(self, all_data:dict[str, pd.DataFrame], n1:range, n2:range) -> pd.DataFrame:
         # Iterate over all datasets and apply optimization
         train_results = []
         for set_type, df in all_data.items():
@@ -46,7 +46,7 @@ class EWMAOptTechAnalysis:
         self.strategy = Strategy
         pass
     
-    def ewma_params_n_tf_optimization(self, set_type, data, n1, n2, param = 'Return [%]'):
+    def ewma_params_n_tf_optimization(self, set_type: str, data: pd.DataFrame, n1: range, n2: range, param: str = 'Return [%]') -> dict:
         bt = Backtest(data, self.strategy, cash=10_000_000, commission=0.002)
         stats, heatmap = bt.optimize(
     
@@ -63,7 +63,7 @@ class EWMAOptTechAnalysis:
 
         return best_results
     
-    def ewma_strategy_optimization(self, all_data, n1, n2):
+    def ewma_strategy_optimization(self, all_data: dict[str, pd.DataFrame], n1: range, n2: range) -> pd.DataFrame:
         train_results = []
         for set_type, df in all_data.items():
             if "train" in set_type:
@@ -78,9 +78,7 @@ class BollingerBandsOptTechAnalysis:
         self.strategy = Strategy
         pass
     
-    def BollingerBands_params_n_tf_optimization(self, set_type, data,
-                                                n1_range, n2_range,
-                                                param='Return [%]'):
+    def BollingerBands_params_n_tf_optimization(self, set_type: str, data: pd.DataFrame, n1_range: range, n2_range: range, param: str = 'Return [%]') -> dict:
         bt = Backtest(data, self.strategy,
                       cash=10_000_000, commission=0.002)
         stats, heatmap = bt.optimize(
@@ -97,7 +95,7 @@ class BollingerBandsOptTechAnalysis:
 
         return best_results
 
-    def bollinger_strategy_optimization(self, all_data, n1_range, n2_range):
+    def bollinger_strategy_optimization(self, all_data: dict[str, pd.DataFrame], n1_range: range, n2_range: range) -> pd.DataFrame:
         results = []
         for set_type, df in all_data.items():
             if "train" in set_type:
