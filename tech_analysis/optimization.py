@@ -89,10 +89,15 @@ class BollingerBandsOptTechAnalysis:
             return_heatmap = True,
         )
 
-        best_params = heatmap.sort_values(ascending=False).iloc[0]
+        best_params = heatmap.sort_values(ascending=False)
+        best_results = {
+            'interval': set_type,
+            'n1': best_params.index[0][0],
+            'n2': best_params.index[0][1],
+            'Return [%]': best_params.iloc[0],
+            'No. of Trades': stats['# Trades']
+        }
         
-        best_results = {'interval': set_type, 'n1': best_params.index[0][0], 'n2': best_params.index[0][1], 'Return [%]': best_params.iloc[0], 'No. of Trades': stats['# Trades']}
-
         return best_results
 
     def bollinger_strategy_optimization(self, all_data: dict[str, pd.DataFrame], n1_range: range, n2_range: range) -> pd.DataFrame:

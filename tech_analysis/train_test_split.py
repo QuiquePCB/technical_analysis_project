@@ -22,11 +22,11 @@ class TrainTestSets:
         if interval in ["1m", "2m", "5m", "30m"]:
             start = "2025-05-31"
             end = "2025-06-06"
-        elif interval in ["15m", "60m", "90m"]:
+        elif interval in ["15m", "60m", "90m", "1h", "4h"]:
             start = "2025-04-28"
             end = "2025-06-06"
-        elif interval in ["1h", "4h", "1d", "5d", "1wk"]:
-            start = "2024-06-06"
+        elif interval in ["1d", "5d", "1wk"]:
+            start = "2023-06-06"
             end = "2025-06-06"
         # Download data using yfinance
         data = yf.download(tickers = ticker, start=start, end=end, interval=interval)
