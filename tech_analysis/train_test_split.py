@@ -17,6 +17,8 @@ class TrainTestSets:
 
         Returns:
             tuple: A tuple containing the training and testing datasets as pandas DataFrames.
+
+        As the lapse was extended to 2 years, we have to modified te intervals. The 2 years only applies to the daily and weekly intervals.
         """
 
         if interval in ["1m", "2m", "5m", "30m"]:
